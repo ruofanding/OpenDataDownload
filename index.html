@@ -1,44 +1,22 @@
 <!DOCTYPE html>
 
 <html>
-  <head>
+<head>
     <script src="https://cdn.firebase.com/js/client/1.1.1/firebase.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
-    </head>
-  <body>
-    
-    <h1>Download Testing</h1>
-    
-    <p>My first paragraph.</p>
-    
-    <script>
-    var rootDataRef = new Firebase("http://cityknowledge.firebaseio.com").child("groups").child("PV MERGE May 2013 KM Flagstaff Pedestals").child("members");
-var dataRef = new Firebase("http://cityknowledge.firebaseio.com").child("data");
-var num = 0;
-var idArray = {};
-
-rootDataRef.once('value', function(dataSnapshot){ 
-    dataSnapshot.forEach(function(childSnapshot){
-	idArray[num] = childSnapshot.val();
-	//console.log(idArray[num]);
-	dataRef.child(idArray[num]).once('value', function(dataSnapshot2){
-	    console.log(dataSnapshot2.val());
-	});
-	num++;
-    });
-    //console.log(dataSnapshot.val());
-});
+    <script src="js/download.js"> </script>
+</head>
 
 
-//dataRef.once('value', function(dataSnapshot){
-//dataSnapshot.forEach(function(childSnapshot){
-//console.log(childSnapshot.val());
-//});
-//});
+<body>
+    <div ng-app="list" ng-controller="listController">
+        <b>Data Sets:</b>
+        <ul>
+            <li ng-repeat="d in dataSets">
+                {{d}} <button ng-click='download(d)'>Download</button>
+            </li>
+            
+    </div>
+</body>
 
-    
-</script>
-    
-    </body>
-    </html>
-    
+</html>
