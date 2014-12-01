@@ -2,21 +2,56 @@
 
 <html>
 <head>
+    <title>Download</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
     <script src="https://cdn.firebase.com/js/client/1.1.1/firebase.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
     <script src="js/download.js"> </script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
 </head>
 
 
 <body>
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+
+          <a href="http://veniceprojectcenter.org" ><img style="margin: 0px 0px 0px 20px;" src="images/header_image.png" alt="VPC logo"></a></a>
+        </div>
+        <div>
+          <ul class="nav navbar-nav">
+            <!--<li class="active"><a href="#">Home</a></li>-->
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+
     <div ng-app="list" ng-controller="listController">
         <b>Data Sets:</b>
-        <ul>
-            <li ng-repeat="d in dataSets">
-                {{d}} <button ng-click='download(d)'>Download</button>
-            </li>
-            
+        <div class="panel-group" id="accordion">
+            <div class="panel panel-default" ng-repeat="d in dataSets">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#{{$index}}">{{d}}</a>
+                    </h4>
+                </div>
+                <div id ="{{$index}}" class="panel-collapse collapse">
+                    <div class="panel-body">More info will be put here.</div>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
 </body>
 
 </html>

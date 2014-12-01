@@ -2,6 +2,11 @@ angular.module('download', []).factory('downloadController', ['$q', function($q)
 
     var rootRef = new Firebase("http://cityknowledge.firebaseio.com");
 
+              /**                                                                                                                                                               
+                 * @param formId the id of the form                                                                                                                               
+                 * @return AsyncValue<formData>                                                                                                                                   
+                 */                                                                                                                                                               
+   
     function getDataId(groupName){
         var groupRef = rootRef.child("groups").child(groupName).child("members");
         var deferred = $q.defer();
@@ -26,7 +31,8 @@ angular.module('download', []).factory('downloadController', ['$q', function($q)
                 dataRef.child(idArray[index]).once('value', function(dataSnapshot){
                     dataArray.push(dataSnapshot.val());
                     if(dataArray.length == idArray.length){
-                        deferred.resolve(dataArray);
+                        deferred.resolve({groupName: groupName,
+                                          data: dataArray});
                     }
                 });
             }
@@ -43,7 +49,9 @@ angular.module('download', []).factory('downloadController', ['$q', function($q)
         return line;
     }
 
-    function convertToCSV(members){
+    function convertToCSV(groupData){
+        var groupName = groupData.groupName;
+        var members = groupData.data;
         var csv = ""
         headings = members[0].data;
 
@@ -58,7 +66,7 @@ angular.module('download', []).factory('downloadController', ['$q', function($q)
         var hiddenElement = document.createElement('a');
         hiddenElement.href = 'data:attachment/csv,' + encodeURI(csv);
         hiddenElement.target = '_blank';
-        hiddenElement.download = 'myFile.csv';
+        hiddenElement.download = groupName + '.csv';
         hiddenElement.click();
     }
 
@@ -85,8 +93,8 @@ angular.module('download', []).factory('downloadController', ['$q', function($q)
         return line;
     }
 
-    var download = function(dataSetName){
-        getData(dataSetName).then(convertToCSV);
+    var download = function(groupName){
+        getData(groupName).then(convertToCSV);
     };
 
     return {
@@ -98,7 +106,9 @@ angular.module('download', []).factory('downloadController', ['$q', function($q)
 angular.module('list',['download']).controller('listController', ['$scope', '$q', 'downloadController', function($scope, $q, downloadController){
     $scope.dataSets = ["PV MERGE May 2013 KM Flagstaff Pedestals",
                     "PV MERGE Mar 2013 KM Erratic Sculpture Coats of Arms",
-                    "PV MERGE Mar 2013 KM Erratic Sculpture Crosses"];
+                    "PV MERGE Mar 2013 KM Erratic Sculpture Crosses",
+                    "Bardolino Edifici BL Aug 8 MERGE",
+                    "PV MERGE Mar 2013 KM Erratic Sculpture Fragments"];
 
     $scope.num = 0;
 
