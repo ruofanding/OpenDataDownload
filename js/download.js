@@ -1,7 +1,7 @@
-angular.module('download', []).factory('downloadController', ['$q', function($q){ 
+angular.module('download', []).factory('downloadController', ['$q', function($q, $scope){ 
 
     var rootRef = new Firebase("http://cityknowledge.firebaseio.com");
-
+    var progress = 0;
     /**
     * @param groupName the name of group to be retrieved.
     * @return AsyncValue<object> {groupName:" " ,data:[] }
@@ -94,6 +94,7 @@ angular.module('download', []).factory('downloadController', ['$q', function($q)
 
         csv += JSONtoCSVHeading(keys) + "\n";
         for(i in members){
+            progress = 100.0 * i / members.length;
             csv += JSONtoCSV(members[i].data, keys, i) + "\n";
         }
 
@@ -113,22 +114,68 @@ angular.module('download', []).factory('downloadController', ['$q', function($q)
         getData(groupName).then(convertToCSV);
     };
 
+    var getProgress = function(){
+        return progress;
+    }
+
     return {
-        download: download
-  };
+        download: download,
+        getProgress: getProgress
+    };
 }]);
 
 
-angular.module('list',['download']).controller('listController', ['$scope', '$q', 'downloadController', function($scope, $q, downloadController){
+angular.module('list',['download','ui.bootstrap','dialogs']).controller('listController', ['$scope', '$q', 'downloadController', '$rootScope', '$timeout', '$dialogs', function($scope, $q, downloadController, $rootScope, $timeout,$dialogs){
     $scope.dataSets = ["PV MERGE May 2013 KM Flagstaff Pedestals",
                     "PV MERGE Mar 2013 KM Erratic Sculpture Coats of Arms",
                     "PV MERGE Mar 2013 KM Erratic Sculpture Crosses",
                     "Bardolino Edifici BL Aug 8 MERGE",
                     "PV MERGE Mar 2013 KM Erratic Sculpture Fragments"];
 
-    $scope.num = 0;
 
     $scope.download = function(dataSetName){
         downloadController.download(dataSetName);
     }
+
+    $scope.launch = function(which){
+    var dlg = null;
+    var progress = 0;
+    switch(which){
+      // Wait / Progress Dialog
+      
+      case 'wait':
+        dlg = $dialogs.wait(msgs,progress);
+        fakeProgress();
+        break;
+        
+    }; // end switch
+  }; // end launch
+  
+  // for faking the progress bar in the wait dialog
+   var msgs = [
+    'Hey! I\'m waiting here...',
+    'About half way done...',
+    'Almost there?',
+    'Woo Hoo! I made it!'
+  ];
+  var i = 0;
+  
+  var fakeProgress = function(){
+    progress = downloadController.getProgress();
+    $timeout(function(){
+      if(progress < 99){
+        $rootScope.$broadcast('dialogs.wait.progress',{msg: "Finish:",'progress': progress});
+        fakeProgress();
+      }else{
+        $rootScope.$broadcast('dialogs.wait.complete');
+      }
+    },1000);
+  }; // end fakeProgress 
+
+
+
 }]);
+
+
+
+
