@@ -8,39 +8,19 @@
 
 
     <script src="https://cdn.firebase.com/js/client/1.1.1/firebase.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
     
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
     <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.6.0.js" type="text/javascript"></script>
     <script src="http://m-e-conroy.github.io/angular-dialog-service/javascripts/dialogs.min.js" type="text/javascript"></script>
 
    
-
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="dialogs.css">
-
 
     <script src="js/download.js" type="text/javascript"> </script>
-
-
-<!--
-    <script src="https://cdn.firebase.com/js/client/1.1.1/firebase.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
-
-
-    <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.6.0.js" type="text/javascript"></script>
-    <script src="http://m-e-conroy.github.io/angular-dialog-service/javascripts/dialogs.min.js" type="text/javascript"></script>
-
-    <link rel="stylesheet" href="dialogs.css">
-
-
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-
-  
-    <link rel="stylesheet" href="dialogs.css">
-    <script src="js/dialog.js" type="text/javascript"> </script>
--->
-
 
 </head>
 
@@ -72,19 +52,19 @@
                     </h4>
                 </div>
                 <div id ="{{$index}}" class="panel-collapse collapse">
-                    <div class="panel-body">More info will be put here.</div>
-                    <button ng-click='download(d)'>Download</button>
-                    <div class="pad">
-                         <button class="btn btn-primary" ng-click="download(d);launch('wait')">Download</button>
+                    <div class="panel-body">
+                        More info will be put here.
+                        <div class="pad">
+                            <button class="btn btn-primary" ng-click="launchDownload(d)">Download</button>
+                        </div>
                     </div>
+                    
+                         
                 </div>
             </div>
         </div>
     </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
     
 

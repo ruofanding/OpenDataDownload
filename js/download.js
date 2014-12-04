@@ -1,7 +1,7 @@
 angular.module('download', []).factory('downloadController', ['$q', function($q, $scope){ 
 
     var rootRef = new Firebase("http://cityknowledge.firebaseio.com");
-    var progress = 0;
+    var progress;
     /**
     * @param groupName the name of group to be retrieved.
     * @return AsyncValue<object> {groupName:" " ,data:[] }
@@ -34,6 +34,7 @@ angular.module('download', []).factory('downloadController', ['$q', function($q,
             for(var index in idArray){
                 dataRef.child(idArray[index]).once('value', function(dataSnapshot){
                     dataArray.push(dataSnapshot.val());
+                    progress = 95.0 * dataArray.length / idArray.length
                     if(dataArray.length == idArray.length){
                         deferred.resolve({groupName: groupName,
                                           data: dataArray});
@@ -94,7 +95,7 @@ angular.module('download', []).factory('downloadController', ['$q', function($q,
 
         csv += JSONtoCSVHeading(keys) + "\n";
         for(i in members){
-            progress = 100.0 * i / members.length;
+            progress = 95 + 10.0 * i / members.length;
             csv += JSONtoCSV(members[i].data, keys, i) + "\n";
         }
 
@@ -111,6 +112,7 @@ angular.module('download', []).factory('downloadController', ['$q', function($q,
     
 
     var download = function(groupName){
+        progress = 0.0;
         getData(groupName).then(convertToCSV);
     };
 
@@ -137,39 +139,27 @@ angular.module('list',['download','ui.bootstrap','dialogs']).controller('listCon
         downloadController.download(dataSetName);
     }
 
-    $scope.launch = function(which){
-    var dlg = null;
-    var progress = 0;
-    switch(which){
-      // Wait / Progress Dialog
-      
-      case 'wait':
-        dlg = $dialogs.wait(msgs,progress);
+    $scope.launchDownload = function(dataSetName){
+        $dialogs.wait("Hello world", 0);
+        downloadController.download(dataSetName)
         fakeProgress();
-        break;
-        
-    }; // end switch
-  }; // end launch
+    };
   
-  // for faking the progress bar in the wait dialog
-   var msgs = [
-    'Hey! I\'m waiting here...',
-    'About half way done...',
-    'Almost there?',
-    'Woo Hoo! I made it!'
-  ];
   var i = 0;
   
   var fakeProgress = function(){
     progress = downloadController.getProgress();
     $timeout(function(){
       if(progress < 99){
-        $rootScope.$broadcast('dialogs.wait.progress',{msg: "Finish:",'progress': progress});
+        $rootScope.$broadcast('dialogs.wait.progress',{'msg': "Hello",'progress': progress});
         fakeProgress();
       }else{
-        $rootScope.$broadcast('dialogs.wait.complete');
+        $rootScope.$broadcast('dialogs.wait.progress',{'msg': "Hello",'progress': 100});
+        $timeout(function(){
+            $rootScope.$broadcast('dialogs.wait.complete');
+        }, 1000);
       }
-    },1000);
+    },30);
   }; // end fakeProgress 
 
 
