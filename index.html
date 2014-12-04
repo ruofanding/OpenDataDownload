@@ -25,51 +25,47 @@
 </head>
 
 
-<body ng-app="list"  >
+<body ng-app="list">
 
     <nav class="navbar navbar-inverse">
-      <div class="container-fluid">
+      <div class="container">
         <div class="navbar-header">
 
           <a href="http://veniceprojectcenter.org" ><img style="margin: 0px 0px 0px 20px;" src="images/header_image.png" alt="VPC logo"></a></a>
         </div>
         <div>
-          <ul class="nav navbar-nav">
-
+          <ul class="nav navbar-nav navbar-right">
+            <input ng-model="searchText" type="text" placeholder="Search" class="form-control">
           </ul>
         </div>
       </div>
     </nav>
 
 
-    <div ng-controller="listController">
-        <b>Data Sets:</b>
-        <div class="panel-group" id="accordion">
-            <div class="panel panel-default" ng-repeat="d in dataSets">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#{{$index}}">{{d}}</a>
-                    </h4>
-                </div>
-                <div id ="{{$index}}" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        More info will be put here.
-                        <div class="pad">
-                            <button class="btn btn-primary" ng-click="launchDownload(d)">Download</button>
-                        </div>
+    <div class="container">
+        <div ng-controller="listController">
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default" ng-repeat="d in dataSets | filter:searchText">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#{{$index}}">
+                                <p class="text-center">{{d}} </p>
+                            </a>
+                        </h4>
                     </div>
-                    
-                         
+                    <div id ="{{$index}}" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            More info will be put here.
+                            <div class="pad">
+                                <button class="btn btn-primary" ng-click="launchDownload(d)">Download</button>
+                            </div>
+                        </div>     
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-
     
-
-    
-
 </body>
 
 </html>

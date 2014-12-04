@@ -44,9 +44,6 @@ angular.module('download', []).factory('downloadController', ['$q', function($q,
         });
         return deferred.promise;
     }
-
-    
-
     function convertToCSV(groupData){
 
         function JSONtoCSVHeading(keys){
@@ -140,30 +137,27 @@ angular.module('list',['download','ui.bootstrap','dialogs']).controller('listCon
     }
 
     $scope.launchDownload = function(dataSetName){
-        $dialogs.wait("Hello world", 0);
+        $dialogs.wait("", 0);
         downloadController.download(dataSetName)
-        fakeProgress();
+        updateProgress();
+
+
+        function updateProgress(){
+            progress = downloadController.getProgress();
+            $timeout(function(){
+              if(progress < 99){
+                $rootScope.$broadcast('dialogs.wait.progress',{'msg': "",'progress': progress});
+                updateProgress();
+              }else{
+                $rootScope.$broadcast('dialogs.wait.progress',{'msg': "",'progress': 100});
+                $timeout(function(){
+                    $rootScope.$broadcast('dialogs.wait.complete');
+                }, 1000);
+              }
+            },30);
+        };
     };
   
-  var i = 0;
-  
-  var fakeProgress = function(){
-    progress = downloadController.getProgress();
-    $timeout(function(){
-      if(progress < 99){
-        $rootScope.$broadcast('dialogs.wait.progress',{'msg': "Hello",'progress': progress});
-        fakeProgress();
-      }else{
-        $rootScope.$broadcast('dialogs.wait.progress',{'msg': "Hello",'progress': 100});
-        $timeout(function(){
-            $rootScope.$broadcast('dialogs.wait.complete');
-        }, 1000);
-      }
-    },30);
-  }; // end fakeProgress 
-
-
-
 }]);
 
 
