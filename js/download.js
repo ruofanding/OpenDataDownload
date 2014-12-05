@@ -101,9 +101,10 @@ angular.module('download', []).factory('downloadController', ['$q', function($q,
 
         var hiddenElement = document.createElement('a');
         hiddenElement.href = 'data:attachment/csv,' + encodeURI(csv);
-        hiddenElement.target = '_blank';
+        //hiddenElement.target = '_blank';
         hiddenElement.download = groupName + '.csv';
         hiddenElement.click();
+
     }
 
     
@@ -123,13 +124,29 @@ angular.module('download', []).factory('downloadController', ['$q', function($q,
     };
 }]);
 
+angular.module('list',['download','ui.bootstrap','dialogs'])
+.service('getListService', function($http, $q) {
+    this.promiseToHaveData = function() {
+        var defer = $q.defer();
 
-angular.module('list',['download','ui.bootstrap','dialogs']).controller('listController', ['$scope', '$q', 'downloadController', '$rootScope', '$timeout', '$dialogs', function($scope, $q, downloadController, $rootScope, $timeout,$dialogs){
-    $scope.dataSets = ["PV MERGE May 2013 KM Flagstaff Pedestals",
-                    "PV MERGE Mar 2013 KM Erratic Sculpture Coats of Arms",
-                    "PV MERGE Mar 2013 KM Erratic Sculpture Crosses",
-                    "Bardolino Edifici BL Aug 8 MERGE",
-                    "PV MERGE Mar 2013 KM Erratic Sculpture Fragments"];
+
+        $http.get('/download/metadata.json')
+            .success(function(data) {
+                console.log(data);
+                defer.resolve(data);
+            })
+            .error(function() {
+                defer.reject('could not find metadata.json');
+        });
+
+    return defer.promise;
+    }
+})
+.controller('listController', ['$scope', '$q', 'downloadController', '$rootScope', '$timeout', '$dialogs', 'getListService',
+    function($scope, $q, downloadController, $rootScope, $timeout,$dialogs, getListService){
+    $scope.dataSets = [];
+
+    getListService.promiseToHaveData().then(function(data){$scope.dataSets = data});
 
 
     $scope.download = function(dataSetName){

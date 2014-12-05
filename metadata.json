@@ -1,0 +1,44 @@
+[
+	{
+		"ckGroup": "PV MERGE May 2013 KM Flagstaff Pedestals",
+		"name": "Flagstaff Pedestals Data Set 1997",
+		"info": "Flagstaff pedestals data set was first collected by WPI students in 1997. This data set contains detailed information for 55 flagstaff pedestals. It covers more than 100 aspects of each Flagstaff pedestal, such as height, width, material, and etc. This data set also includes picture urls for most of the pedestals."
+	},
+	{
+		"ckGroup": "PV MERGE Mar 2013 KM Erratic Sculpture Coats of Arms",
+		"name": "Erratic Sculpture Coats of Arms Data Set",
+		"info": "Erratic Sculpture Coats of Arms contains records for sculpture coats of arms collected in Venice. It covers the information, additioanl details, and dimensions of the coats of arms. There are more than a thousand entries of Coats of Arms in this data set, and most of them have pictures attached."
+	},
+	{
+		"ckGroup": "PV MERGE Feb 2013 KM Erratic Sculpture Reliefs",
+		"name": "Erratic Sculpture Reliefs",
+		"info": "Erratic Sculpture Reliefs contains records for sculpture Reliefs collected in Venice. It covers the information, additioanl details, and dimensions of the Reliefs. There are more than a thousand entries of Reliefs in this data set, and most of them have pictures attached."
+	},
+	{
+		"ckGroup": "PV MERGE Feb 2013 KM Erratic Sculpture Street Altars",
+		"name": "Erratic Sculpture Street Altars",
+		"info": "Erratic Sculpture Street Altars contains records for sculpture Street Altars collected in Venice. It covers the information, additioanl details, and dimensions of the Street Altars. There are more than a thousand entries of Street Altars in this data set, and most of them have pictures attached."
+	},
+	{
+		"ckGroup": "PV MERGE Feb 2013 KM Erratic Sculpture Inscriptions",
+		"name": "Erratic Sculpture Inscriptions",
+		"info": "Erratic Sculpture Inscriptions contains records for Inscriptions collected in Venice. It covers the information, additioanl details, and dimensions of the coats of arms. There are more than a thousand entries of Inscriptions in this data set, and most of them have pictures attached."
+	},
+	{
+		"ckGroup": "PV MERGE Feb 2013 KM Erratic Sculpture Symbols",
+		"name": "Erratic Sculpture Symbol",
+		"info": "Erratic Sculpture Symbols contains records for Symbols collected in Venice. It covers the information, additioanl details, and dimensions of the Symbols. There are more than a thousand entries of Coats of Arms in this data set, and most of them have pictures attached."
+	},
+	{
+		"ckGroup": "PV MERGE May 2013 KM Fountains",
+		"name": "Fountains Data Set",
+		"info": "Fountains Data Set contains records for Fountains collected in Venice. It covers the information, additioanl details, and dimensions of the coats of arms. There are more than one hundred entries of Fountains in this data set, and most of them have pictures attached."
+	},
+	{
+		"ckGroup": "PV MERGE Mar 2013 KM Erratic Sculpture Decorations",
+		"name": "Erratic Sculpture Decorations",
+		"info": "Erratic Sculpture Decorations contains records for Decorations collected in Venice. It covers the information, additioanl details, and dimensions of the coats of arms. There are more than a thousand entries of Decorations in this data set, and most of them have pictures attached."
+	}
+
+	
+]
