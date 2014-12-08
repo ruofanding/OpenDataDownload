@@ -130,7 +130,7 @@ angular.module('list',['download','ui.bootstrap','dialogs'])
         var defer = $q.defer();
 
 
-        $http.get('./metadata.json')
+        $http.get('/download/metadata.json')
             .success(function(data) {
                 console.log(data);
                 defer.resolve(data);
