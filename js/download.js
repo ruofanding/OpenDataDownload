@@ -101,7 +101,6 @@ angular.module('download', []).factory('downloadController', ['$q', function($q,
 
         var hiddenElement = document.createElement('a');
         hiddenElement.href = 'data:attachment/csv,' + encodeURI(csv);
-        //hiddenElement.target = '_blank';
         hiddenElement.download = groupName + '.csv';
         hiddenElement.click();
 
@@ -124,7 +123,7 @@ angular.module('download', []).factory('downloadController', ['$q', function($q,
     };
 }]);
 
-angular.module('list',['download','ui.bootstrap','dialogs'])
+angular.module('list',['angulartics', 'angulartics.google.analytics', 'download','ui.bootstrap','dialogs'])
 .service('getListService', function($http, $q) {
     this.promiseToHaveData = function() {
         var defer = $q.defer();

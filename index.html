@@ -16,6 +16,9 @@
     <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.6.0.js" type="text/javascript"></script>
     <script src="http://m-e-conroy.github.io/angular-dialog-service/javascripts/dialogs.min.js" type="text/javascript"></script>
 
+    <script src="js/angulartics.js"></script>
+    <script src="js/angulartics-ga.js"></script>
+
    
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/dialogs.css">
@@ -64,7 +67,7 @@
                         <div class="panel-body">
                             {{d.info}}
                             <div class="pad">
-                                <button class="btn btn-primary navbar-right" ng-click="launchDownload(d.ckGroup)">Download</button>
+                                <button class="btn btn-primary navbar-right" ng-click="launchDownload(d.ckGroup)" analytics-on="click" analytics-event="d" analytics-category="Download">Download</button>
                             </div>
                         </div>     
                     </div>
