@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="panel-group" id="accordion">
+    <div class="panel panel-default" ng-repeat="d in dataSets | filter:searchText">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" data-target="#{{$index}}">
+            <p class="text-center">{{d.title}} </p>
+          </a>
+        </h4>
+      </div>
+      <div id ="{{$index}}" class="panel-collapse collapse">
+        <div class="panel-body">
+	  <p ng-if="d.info"> {{d.info}} </p>
+          <div class="pad">
+            <button class="btn btn-primary navbar-right" ng-click="launchDownload(d.groupName)" analytics-on="click" analytics-event="{{d.title}}" analytics-category="Download">Download</button>
+          </div>
+        </div>     
+      </div>
+    </div>
+  </div>
+</div>
+
