@@ -11,6 +11,7 @@
     
     
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular-route.min.js"></script>
 
     <!--Jquery and Bootstrap-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -64,15 +65,15 @@
           <div class="panel-heading">
             <h4 class="panel-title">
               <a data-toggle="collapse" data-parent="#accordion" href="#{{$index}}">
-                <p class="text-center">{{d.name}} </p>
+                <p class="text-center">{{d.title}} </p>
               </a>
             </h4>
           </div>
           <div id ="{{$index}}" class="panel-collapse collapse">
             <div class="panel-body">
-              {{d.info}}
+	      <p ng-if="d.info"> {{d.info}} </p>
               <div class="pad">
-                <button class="btn btn-primary navbar-right" ng-click="launchDownload(d.ckGroup)" analytics-on="click" analytics-event="{{d.name}}" analytics-category="Download">Download</button>
+                <button class="btn btn-primary navbar-right" ng-click="launchDownload(d.groupName)" analytics-on="click" analytics-event="{{d.title}}" analytics-category="Download">Download</button>
               </div>
             </div>     
           </div>
