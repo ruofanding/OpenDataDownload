@@ -7,13 +7,12 @@ app.config(['$routeProvider', function($routeProvider) {
 	    controller: 'listController'
 	}).
 	when('/title/:title', {
-	    templateUrl: 'partial/one.html',
+	    templateUrl: 'partial/single.html',
 	    controller: 'singleController'
-	});/*.
+	}).
 	otherwise({
-	    templateUrl: 'partial/list.html',
-	    controller: 'listController'
-	});*/
+	    redirectTo: '/'
+	});
 }]);
 
 app.service('getListService', function($http, $q) {    

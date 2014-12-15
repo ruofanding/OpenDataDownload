@@ -1,28 +1,57 @@
 [
-    { "groupName": "PV MERGE Mar 2013 KM Erratic Sculpture Coats of Arms",  "title": "Coats of Arms"}
-    , { "groupName": "PV MERGE Mar 2013 KM Erratic Sculpture Crosses", "title": "Crosses"}
-    , { "groupName": "PV MERGE Mar 2013 KM Erratic Sculpture Inscriptions",  "title": "Inscriptions" }
-    , { "groupName": "PV MERGE Mar 2013 KM Erratic Sculpture Decorations",  "title": "Decorations"}
-    , { "groupName": "PV DATA Feb 2013 KM Erratic Sculpture Fragments", "title": "Fragments"}
-    , { "groupName": "PV MERGE Mar 2013 KM Erratic Sculpture Other",  "title": "Other"}
-    , { "groupName": "PV MERGE Mar 2013 KM Erratic Sculpture Patere",  "title": "Patere"}
-    , { "groupName": "PV MERGE Mar 2013 KM Erratic Sculpture Street Altars",  "title": "Street Altars"}
-    , { "groupName": "PV MERGE Mar 2013 KM Erratic Sculpture Reliefs",  "title": "Reliefs"}
-    , { "groupName": "PV MERGE Mar 2013 KM Erratic Sculpture Symbols",  "title": "Symbols"}
-    , { "groupName": "PV MERGE Mar 2013 KM Erratic Sculpture Sculptures", "title": "Sculptures" }
-    , { "groupName": "Venice Churches",  "title": "Churches"}
-    , { "groupName": "Convents Final Merge",  "title": "Convents" }
-    , { "groupName": "Merge Stores", "title": "Stores" }
-    , { "groupName": "Bell Tower Final 2014 MERGE", "title": "Bell Tower Clocks" }
-    , { "groupName": "Minich Clocks Final", "title": "Minich Clocks"}
-    , { "groupName": "Public Clocks Final 2014 MERGE", "title": "Public Clocks"}
-    , { "groupName": "MERGE Fondamente", "title": "Fondamente"}
-    , { "groupName": "MERGE Rive", "title": "Rive"}
-    , { "groupName": "MERGE Pontili", "title": "Pontili" }
-    , { "groupName": "PV MERGE May 2013 KM Fountains",  "title": "Fountains"}
-    , { "groupName": "MERGE COSES Station Locations", "title": "Traffic Counts"}
-    , { "groupName": "MERGE Pontili", "title": "Pontili"}
-    , { "groupName": "MERGE Ponti", "title": "Ponti"}
-    , { "groupName": "MERGE Canals", "title": "Canals"}
-    , { "groupName": "Bell Tower Page Final", "title": "Bell Towers"}
+    { "groupName": "Flagstaff Merge 2014",
+      "title": "Flagstaff pedestal 2014",
+      "info": "Flagstaff pedestals data set was first collected by WPI students in 1997, and recollected in 2014.This data set contains detailed information for 55 flagstaff pedestals. It covers more than 100 aspects of each Flagstaff pedestal, such as height, width, material, and etc. This data set also includes picture urls for most of the pedestals."},
+    { "groupName": "PV MERGE Mar 2013 KM Erratic Sculpture Coats of Arms",
+      "title": "Coats of Arms"},
+    { "groupName": "PV MERGE Mar 2013 KM Erratic Sculpture Crosses",
+      "title": "Crosses"},
+    { "groupName": "PV MERGE Mar 2013 KM Erratic Sculpture Inscriptions",
+      "title": "Inscriptions" },
+    { "groupName": "PV MERGE Mar 2013 KM Erratic Sculpture Decorations",
+      "title": "Decorations"},
+    { "groupName": "PV DATA Feb 2013 KM Erratic Sculpture Fragments",
+      "title": "Fragments"},
+    { "groupName": "PV MERGE Mar 2013 KM Erratic Sculpture Other",
+      "title": "Other"},
+    { "groupName": "PV MERGE Mar 2013 KM Erratic Sculpture Patere",
+      "title": "Patere"},
+    { "groupName": "PV MERGE Mar 2013 KM Erratic Sculpture Street Altars",
+      "title": "Street Altars"},
+    { "groupName": "PV MERGE Mar 2013 KM Erratic Sculpture Reliefs",
+      "title": "Reliefs"},
+    { "groupName": "PV MERGE Mar 2013 KM Erratic Sculpture Symbols",
+      "title": "Symbols"},
+    { "groupName": "PV MERGE Mar 2013 KM Erratic Sculpture Sculptures",
+      "title": "Sculptures" },
+    { "groupName": "Venice Churches",
+      "title": "Churches"},
+    { "groupName": "Convents Final Merge",
+      "title": "Convents" },
+    { "groupName": "Merge Stores",
+      "title": "Stores" },
+    { "groupName": "Bell Tower Final 2014 MERGE",
+	"title": "Bell Tower Clocks" },
+    { "groupName": "Minich Clocks Final",
+      "title": "Minich Clocks"},
+    { "groupName": "Public Clocks Final 2014 MERGE",
+      "title": "Public Clocks"},
+    { "groupName": "MERGE Fondamente",
+      "title": "Fondamente"},
+    { "groupName": "MERGE Rive",
+      "title": "Rive"},
+    { "groupName": "MERGE Pontili",
+      "title": "Pontili" },
+    { "groupName": "PV MERGE May 2013 KM Fountains",
+      "title": "Fountains"},
+    { "groupName": "MERGE COSES Station Locations",
+      "title": "Traffic Counts"},
+    { "groupName": "MERGE Pontili",
+      "title": "Pontili"},
+    { "groupName": "MERGE Ponti",
+      "title": "Ponti"},
+    { "groupName": "MERGE Canals",
+      "title": "Canals"},
+    { "groupName": "Bell Tower Page Final",
+      "title": "Bell Towers"}
 ]

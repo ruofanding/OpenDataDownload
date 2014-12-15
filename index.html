@@ -39,7 +39,6 @@
     <link rel="stylesheet" href="js/cache/bootstrap.min.css">
     
     <link rel="stylesheet" href="css/dialogs.css">
-
     <!-- Google analytics -->
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -62,21 +61,19 @@
 
 <body ng-app="list">
   <!--Heading-->
-  <nav class="navbar navbar-inverse">
-    <div class="container">
-      <div class="navbar-header">
-        <a href="http://veniceprojectcenter.org" ><img style="margin: 0px 0px 0px 20px;" src="images/header_image.png" alt="VPC logo"></a>
-      </div>
-      <div>
-        <ul class="nav navbar-nav navbar-right">
-          <input ng-model="searchText" type="text" placeholder="Search" class="form-control">
-        </ul>
-      </div>
-    </div>
-  </nav>
+
+
+  <div class="container-fluid" style="background-color:black">
+	<a href="http://veniceprojectcenter.org"><img style="margin: 0px 0px 0px 20px;" src="images/header_image.png" alt="VPC logo"></a>
+	<span style="float:right;">
+	  <input style="margin-top:15px; float:right", ng-model="searchText" type="text" placeholder="Search" class="form-control">
+	</span>
+  </div>
   
+  
+  <h1 class="text-center">CSV File Download</h1>
   <!--Body-->
-  <div class="main" ng-view>
+  <div class="container" ng-view>
 
     <!-- everthing here was gone to list.html file inside partials folder -->
     
@@ -85,8 +82,9 @@
   <!--Bottom-->
   <div id="footer" class="container">
     <nav class="navbar navbar-default navbar-fixed-bottom">
-      <div class="navbar-inner navbar-content-center">
-        <p class="muted credit text-center">Copyright © 2014 · <a href="http://veniceprojectcenter.org/">Venice Project Center</a>  · All Rights Reserved.</p>
+      <div class="navbar-inner navbar-content-center text-center">
+	<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Venice Project Center Datasets</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://veniceprojectcenter.org/" property="cc:attributionName" rel="cc:attributionURL">Venice Project Center</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+<!---        <p class="muted credit text-center">Copyright © 2014 · <a href="http://veniceprojectcenter.org/">Venice Project Center</a>  · All Rights Reserved.</p>-->
       </div>
     </nav>
   </div>

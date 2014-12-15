@@ -97,42 +97,13 @@ angular.module('download', []).factory('downloadController', ['$q', function($q,
         }
 
         //var encodedUri = 'data:attachment/csv,' + encodeURI(csv);
-       // $window.open(encodedUri);
-
-
-	
-	/*
-	function getMenuItem(item, groupname) {
-	    var menuItem = null;
-	    if (item.groupname && item.groupname == groupname) {
-		return item;
-	    }
-	    if (item.menuItems) {
-		for (var i = 0; i < item.menuItems.length; i++) {
-		    var curMenuItem = item.menuItems[i];
-		    menuItem = getMenuItem(curMenuItem, groupname);
-		    if (menuItem) break;
-		}
-	    }
-	    return menuItem;
-	}*/
-	
-	
+       // $window.open(encodedUri);	
 	
         var hiddenElement = document.createElement('a');
         hiddenElement.href = 'data:attachment/csv,' + encodeURI(csv);
         hiddenElement.download = groupName + '.csv';
         hiddenElement.click();
     }
-
-	var init = function() {
-	    var mapId = "27b651f9-fb46-3218-36b6-c6063d3ed969";
-	    console.log("Loading map data...");
-	    
-	    rootRef.child("maps/"+mapId).once("value", function(snap) {
-		console.log(snap.val());
-	    });
-	};
     
 
     var download = function(groupName){
@@ -145,7 +116,6 @@ angular.module('download', []).factory('downloadController', ['$q', function($q,
     }
 
     return {
-	init: init,
         download: download,
         getProgress: getProgress
     };
