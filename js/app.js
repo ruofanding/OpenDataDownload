@@ -46,7 +46,7 @@ app.service('getDataService', ['$q', function($q, $scope){
 	var rootRef = new Firebase("http://cityknowledge.firebaseio.com");
         var dataRef = rootRef.child("data");
         var deferred = $q.defer();
-	progress = 0;
+	progress = 0.0;
         /**
          * @param groupName the name of group to be retrieved.
          * @return AsyncValue<idArray> an array contains ids which are keys to retrieve from rootRef.child("data")
@@ -69,7 +69,7 @@ app.service('getDataService', ['$q', function($q, $scope){
             for(var index in idArray){
                 dataRef.child(idArray[index]).once('value', function(dataSnapshot){
                     dataArray.push(dataSnapshot.val());
-                    progress = 95.0 * dataArray.length / idArray.length
+                    progress = 5 + 90.0 * dataArray.length / idArray.length
                     if(dataArray.length == idArray.length){
                         deferred.resolve(dataArray);
                     }
@@ -142,40 +142,25 @@ app.service('csvService', function(){
             progress = 95 + 10.0 * i / members.length;
             csv += JSONtoCSV(members[i].data, keys, i) + "\n";
         }
-	console.log(title);
-        //var encodedUri = 'data:attachment/csv,' + encodeURI(csv);
-       // $window.open(encodedUri);	
-	
-        var hiddenElement = document.createElement('a');
-        hiddenElement.href = 'data:attachment/csv,' + encodeURI(csv);
-        hiddenElement.download = title + '.csv';
-        hiddenElement.click();
+
+	var blob = new Blob([csv], {type: "text/csv;charset=utf-8"});
+	saveAs(blob, title + '.csv');
     }
 });
 
 
 //app.service('csvService', function(){});
 
-app.service('downloadService', ['getDataService', 'csvService', '$q', '$rootScope', '$timeout', '$dialogs',
-function(getDataService, csvService, $q, $rootScope, $timeout, $dialogs){    
+app.service('downloadService', ['getDataService', 'csvService', '$q', '$rootScope', '$timeout', '$dialogs', function(getDataService, csvService, $q, $rootScope, $timeout, $dialogs){    
     var progress;
-    this.download = function(groupName, metadataDeferred){
+    this.download = function(groupName, metaData){
 	$dialogs.wait("", 0);
 	progress = 0;
 	var dataDeferred = getDataService.getData(groupName);	
-	$q.all([dataDeferred, metadataDeferred]).then(function(deferredData){
-	    var data = deferredData[0];
-	    var metaData;
-	    for(i in deferredData[1]){
-		if(groupName == deferredData[1][i].groupName){
-		    metaData = deferredData[1][i];
-		    break;
-		}
-	    }
+	dataDeferred.then(function(data){
 	    csvService.convertToCSV(metaData.title, data, metaData.ignore);
 	});
 	updateProgress();
-
     };
     function getProgress(){
 	if(progress < 95){
@@ -200,33 +185,41 @@ function(getDataService, csvService, $q, $rootScope, $timeout, $dialogs){
     
 }]);
 
-app.controller('listController', ['$scope', '$q', 'getListService', 'downloadService',
-function($scope, $q, getListService, downloadService){
+app.controller('listController', ['$scope', '$q', 'getListService', 'downloadService', function($scope, $q, getListService, downloadService){
     $scope.dataSets = [];
     var metadataDeferred = getListService.getList();
-    metadataDeferred.then(function(data){$scope.dataSets = data});
+    metadataDeferred.then(function(data){
+	$scope.dataSets = data
+		
+    });
     
     $scope.launchDownload = function(groupName){
-	downloadService.download(groupName, metadataDeferred);
+	for(i in $scope.dataSets){
+	    if(groupName == $scope.dataSets[i].groupName){
+		metaData = $scope.dataSets[i];
+		break;
+	    }
+	}
+	downloadService.download(groupName, metaData);
     }
 }]);
 
-app.controller('singleController', ['$scope', '$q', 'getListService', 'downloadService', '$routeParams',
-function($scope, $q, getListService, downloadService, $routeParams){
+app.controller('singleController', ['$scope', '$q', 'getListService', 'downloadService', '$routeParams', function($scope, $q, getListService, downloadService, $routeParams){
     $scope.title = $routeParams.title;
-
-    getListService.promiseToHaveData().then(function(dataSets)
-	{
-	    for(i in dataSets){
-		if(dataSets[i].title == $scope.title){
-		    $scope.groupName = dataSets[i].groupName;
-		    $scope.info = dataSets[i].info;
-		    break;
-		}
+    var metaData;
+    getListService.getList().then(function(dataSets){
+	for(i in dataSets){
+	    if(dataSets[i].title == $scope.title){
+		$scope.groupName = dataSets[i].groupName;
+		$scope.info = dataSets[i].info;
+		metaData = dataSets[i];
+		break;
 	    }
-	});
-    
-    $scope.launchDownload = downloadService.launchDownload;
+	}
+    });
+    $scope.launchDownload = function(groupName){
+	downloadService.download(groupName, metaData);
+    }
 }
 ]);
 				    

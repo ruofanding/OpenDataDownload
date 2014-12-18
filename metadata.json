@@ -54,5 +54,14 @@
     { "groupName": "MERGE Canals",
       "title": "Canals"},
     { "groupName": "Bell Tower Page Final",
-      "title": "Bell Towers"}
+      "title": "Bell Towers"},
+    {"groupName": "Bridge Count APP Data",
+      "title": "Bridge Count APP Data"
+    },
+    {"groupName": "Merged Bridge APP Data",
+      "title": "Merged Bridge APP Data"},
+    {"groupName": "MAPS Bridges",
+      "title": "MAPS Bridges"},
+    {"groupName": "MOB APP Bridge Shapes",
+      "title": "MOB APP Bridge Shapes"}
 ]
