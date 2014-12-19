@@ -88,40 +88,69 @@ app.service('csvService', function(){
     }
     this.convertToCSV = function(title, data, ignore){
 	progress = 95;
-        function JSONtoCSVHeading(keys){
+        function JSONtoCSVHeading(keys, isMerged){
             var line = "";
             for(i in keys){
                 if(line != "") line += ',';
                 line += keys[i];
             }
+	    if(isMerged){
+		if(line != "") line += ',';
+		line += "Image_url";
+	    }
             return line;
         }
-	
-        function JSONtoCSV(json, keys, i) {
-            var line = '';	    
+	/**
+	 *obj, the data of one object in json format. 
+	 *keys, an array of properties for obj.data
+	 *isMerged. If the data is merged, then it contains media.
+	 */
+        function JSONtoCSV(obj, keys, isMerged, ) {
+            var line = '';
+
+	    var first = true;
             for (var i in keys) {
-                if(line != '') line += ',';
-                if (typeof json[keys[i]] === 'undefined') {
+                if(first){
+		    first = false;
+		}else{
+		    line += ',';
+		}
+                if (typeof obj.data[keys[i]] === 'undefined') {
                     //if the tuple doesn't have this property, then skip this.
                     continue;
                 }
-                var jsonEntry = "" + json[keys[i]];
-                jsonEntry = jsonEntry.replace(/"/g, '""');
+
+                var objEntry = "" + obj.data[keys[i]];
+                objEntry = objEntry.replace(/"/g, '""');
 		
-                if (jsonEntry.indexOf(',') != -1) {
+                if (objEntry.indexOf(',') != -1) {
                     // if the string has commas in it, surround it in quotes 
-                    line += '"' + jsonEntry + '"';
+                    line += '"' + objEntry + '"';
                 }else {
-                    line += jsonEntry;
+                    line += objEntry;
                 }
+
             }
+	    if(isMerged){
+		line += ",";
+		if(obj.media){
+		    for(var key in obj.media.images){
+			console.log("+1");
+			line += "\"" + obj.media.images[key].original + "\"";
+		    }
+		}
+	    }
+
             return line;
         }
         var members = data;
         var csv = ""
         var keys = []; //the column titles
-
+	var isMerged = false;
         for(i in members){
+	    if(members[i].media){
+		isMerged = true;
+	    }
             for(key in members[i].data){
                 if($.inArray(key, keys) == -1){
                     keys.push(key);
@@ -137,10 +166,10 @@ app.service('csvService', function(){
 	    }
 	}
 
-        csv += JSONtoCSVHeading(keys) + "\n";
+        csv += JSONtoCSVHeading(keys, isMerged) + "\n";
         for(i in members){
             progress = 95 + 10.0 * i / members.length;
-            csv += JSONtoCSV(members[i].data, keys, i) + "\n";
+            csv += JSONtoCSV(members[i], keys, isMerged) + "\n";
         }
 
 	var blob = new Blob([csv], {type: "text/csv;charset=utf-8"});
